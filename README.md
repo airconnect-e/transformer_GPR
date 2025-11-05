@@ -1,6 +1,7 @@
 # transformer_GPR
 
 #structure path
+```bash
 project-root/
 ├─ data/
 │ ├─ train/
@@ -16,3 +17,5 @@ project-root/
 ├─ segformer_trained_export/ # SAVE_PATH (saved final model & processor)
 ├─ tranformer_GPR.py or .ipynb
 └─ requirements.txt
+```
+
