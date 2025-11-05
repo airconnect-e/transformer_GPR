@@ -1,0 +1,28 @@
+# Deep Learning Frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Hugging Face Libraries
+transformers>=4.30.0
+datasets>=2.12.0
+evaluate>=0.4.0
+accelerate>=0.20.0
+
+# Image Processing
+Pillow>=9.5.0
+
+# Data Science & Visualization
+numpy>=1.24.0,<2.0.0
+pandas>=1.5.0
+matplotlib>=3.7.0
+
+# Utilities
+gdown>=4.7.0
+
+# Optional: For better performance with CUDA
+# If you have CUDA 12.1, install PyTorch with:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Note: Standard Python libraries (os, pathlib, zipfile, random)
+# are included with Python and don't need to be installed
