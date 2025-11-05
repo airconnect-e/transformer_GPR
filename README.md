@@ -87,7 +87,7 @@ LR            = 5e-5
 BATCH_SIZE    = 10
 ```
 
-#Cell 3 Create dataset
+# Cell 3 Create dataset
 ```bash
 # ====== Cell 3: BUILD DATASETS & MODEL (no test masks) ======
 train_ds = RoadSegDataset(TRAIN_IMG_DIR, TRAIN_MSK_DIR, processor, image_size=IMAGE_SIZE, has_mask=True)
