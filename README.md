@@ -35,22 +35,6 @@ project-root/
 !pip install PyDrive
 !pip install --upgrade gdown
 ```
-
-#define path dataset
-
-```bash
-# ---- แก้พาธให้ตรงโครงสร้างของคุณ ----
-ROOT = Path("/workspace/gpr_dataset/data")  # <-- เปลี่ยนตรงนี้ให้ตรงตำแหน่งจริงของคุณ ***ถ้าในcolab ใช้ content แทน workspace
-
-TRAIN_IMG_DIR = ROOT / "train/images"
-TRAIN_MSK_DIR = ROOT / "train/masks"
-
-VAL_IMG_DIR   = ROOT / "val/images"
-VAL_MSK_DIR   = ROOT / "val/masks"
-
-TEST_IMG_DIR  = ROOT / "test"   # ผู้ใช้พิมพ์ว่า test/image -> ผมถือว่าเป็น "images"   # ต้องมี ถ้าจะคำนวณ mIoU ของ test
-```
-
 #download file from google drive and extract file
 
 ```bash
@@ -72,7 +56,22 @@ with zipfile.ZipFile(zip_path, 'r') as zip_ref:
 print("✅ Download and unzip completed! Files are in ./gpr_dataset")
 ```
 
-#config
+# Cell 1 define path dataset
+
+```bash
+# ---- แก้พาธให้ตรงโครงสร้างของคุณ ----
+ROOT = Path("/workspace/gpr_dataset/data")  # <-- เปลี่ยนตรงนี้ให้ตรงตำแหน่งจริงของคุณ ***ถ้าในcolab ใช้ content แทน workspace
+
+TRAIN_IMG_DIR = ROOT / "train/images"
+TRAIN_MSK_DIR = ROOT / "train/masks"
+
+VAL_IMG_DIR   = ROOT / "val/images"
+VAL_MSK_DIR   = ROOT / "val/masks"
+
+TEST_IMG_DIR  = ROOT / "test"   # ผู้ใช้พิมพ์ว่า test/image -> ผมถือว่าเป็น "images"   # ต้องมี ถ้าจะคำนวณ mIoU ของ test
+```
+
+# Cell 1 config
 ```bash
 # ---- Task config ----
 NUM_CLASSES   = 2              # แก้จำนวนคลาสตามงานคุณ
@@ -86,4 +85,14 @@ SEED          = 42
 EPOCHS        = 25
 LR            = 5e-5
 BATCH_SIZE    = 10
+```
+
+#Cell 3 Create dataset
+```bash
+# ====== Cell 3: BUILD DATASETS & MODEL (no test masks) ======
+train_ds = RoadSegDataset(TRAIN_IMG_DIR, TRAIN_MSK_DIR, processor, image_size=IMAGE_SIZE, has_mask=True)
+val_ds   = RoadSegDataset(VAL_IMG_DIR,   VAL_MSK_DIR,   processor, image_size=IMAGE_SIZE, has_mask=True)
+
+# --- TEST: images only (no masks) ---
+test_ds  = RoadSegDataset(TEST_IMG_DIR, None, processor, image_size=IMAGE_SIZE, has_mask=False)
 ```
